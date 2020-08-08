@@ -10,7 +10,7 @@ interface PageHeaderProps {
   title: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ title, children }) => {
   const { navigate } = useNavigation();
   return (
     <S.Container>
@@ -23,6 +23,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
         </S.ButtonBordeless>
       </S.TopBar>
       <S.Title>{title}</S.Title>
+      {children}
     </S.Container>
   );
 };
