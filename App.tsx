@@ -16,6 +16,7 @@ import {
   Poppins_600SemiBold,
   useFonts,
 } from '@expo-google-fonts/poppins';
+import AppStack from './src/routes/AppStack';
 
 export default function App() {
   const deviceTheme = useColorScheme();
@@ -34,7 +35,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style="light" />
-      <Landing />
+      <AppStack />
     </ThemeProvider>
   );
 }
