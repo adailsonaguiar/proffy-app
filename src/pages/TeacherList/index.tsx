@@ -2,8 +2,8 @@ import React from 'react';
 
 import * as S from './styles';
 
-function Favorites() {
+function TeacherList() {
   return <S.Container></S.Container>;
 }
 
-export default Favorites;
+export default TeacherList;
