@@ -94,6 +94,7 @@ export const ContactButton = styled(RectButton)`
   align-items: center;
   margin-right: 8;
 `;
+
 export const ContactButtonText = styled.Text`
   color: #fff;
   font-family: Archivo_700Bold;
