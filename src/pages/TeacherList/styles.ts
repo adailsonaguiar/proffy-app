@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import RNPickerSelect from 'react-native-picker-select';
 
 export const Container = styled.View`
   flex: 1;
@@ -15,7 +16,6 @@ export const SearchForm = styled.View`
   padding-right: 40px;
   padding-bottom: 70px;
   background: #8257e5;
-  /* margin-bottom: 4px; */
 `;
 
 export const SubmitButton = styled(RectButton)`
@@ -72,4 +72,15 @@ export const ButtonFilterTxt = styled.Text`
   font-family: Archivo_400Regular;
   font-size: 16px;
   margin-left: 14px;
+`;
+
+export const Select = styled(RNPickerSelect)`
+  height: 54px;
+  background: #fff;
+  border-radius: 8px;
+  justify-content: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: 4px;
+  margin-bottom: 16px;
 `;

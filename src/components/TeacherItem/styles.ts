@@ -4,8 +4,8 @@ import { RectButton } from 'react-native-gesture-handler';
 export const Container = styled.View`
   background: #fff;
   border: 1px #e6e6f0;
-  border-radius: 8;
-  margin-top: 10;
+  border-radius: 8px;
+  margin-top: 10px;
   overflow: hidden;
 `;
 
@@ -92,7 +92,7 @@ export const ContactButton = styled(RectButton)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-right: 8;
+  margin-right: 8px;
 `;
 
 export const ContactButtonText = styled.Text`
