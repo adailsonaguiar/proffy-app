@@ -1,9 +1,25 @@
-import React from 'react';
-import TeacherItem from '../../components/TeacherItem';
+import React, { useState, useEffect } from 'react';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 
 import * as S from './styles';
+import { AsyncStorage } from 'react-native';
 
 function Favorites() {
+  const [favorites, setFavorites] = useState<[Teacher]>([]);
+
+  function loadFavorites() {
+    AsyncStorage.getItem('favorites').then((response) => {
+      if (response) {
+        const favoritedTeachers = JSON.parse(response);
+        setFavorites(favoritedTeachers);
+      }
+    });
+  }
+
+  useEffect(() => {
+    loadFavorites();
+  }, []);
+
   return (
     <S.Container>
       <S.Scrollview
@@ -12,11 +28,9 @@ function Favorites() {
           paddingBottom: 16,
         }}
       >
-        {/* <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem /> */}
+        {favorites.map((teacher) => (
+          <TeacherItem key={teacher.id} teacher={teacher} favorited />
+        ))}
       </S.Scrollview>
     </S.Container>
   );
