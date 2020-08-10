@@ -1,12 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import TeacherItem from '../../components/TeacherItem';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 import { Feather } from '@expo/vector-icons';
 
 import * as S from './styles';
+import api from '../../services/api';
+import { AsyncStorage } from 'react-native';
 
 function TeacherList() {
   const [filtersVisible, setFiltersVisible] = useState(false);
+  const [subject, setSubject] = useState('');
+  const [week_day, setWeekDay] = useState('');
+  const [time, setTime] = useState('');
+  const [teachers, setTeachers] = useState<[Teacher]>([]);
+  const [favorites, setFavorites] = useState<[number]>([]);
+
+  function loadFavorites() {
+    AsyncStorage.getItem('favorites').then((response) => {
+      if (response) {
+        const favoritedTeachers = JSON.parse(response);
+        const favoritedTeachersIds = favoritedTeachers.map(
+          (teacher: Teacher) => {
+            return teacher.id;
+          }
+        );
+        setFavorites(favoritedTeachersIds);
+      }
+    });
+  }
+
+  async function searchTeachers() {
+    loadFavorites();
+    const response = await api.get('/classes', {
+      params: {
+        subject,
+        week_day,
+        time,
+      },
+    });
+    if (response) {
+      setTeachers(response.data);
+      setFiltersVisible(false);
+    }
+  }
+
   return (
     <>
       <S.SearchForm>
@@ -24,6 +61,8 @@ function TeacherList() {
             <S.Input
               placeholderTextColor="#c1bccc"
               placeholder="Qual a matéria?"
+              value={subject}
+              onChangeText={(value) => setSubject(value)}
             />
             <S.InputGroup>
               <S.InputBlock>
@@ -31,6 +70,8 @@ function TeacherList() {
                 <S.Input
                   placeholderTextColor="#c1bccc"
                   placeholder="Qual o dia?"
+                  value={week_day}
+                  onChangeText={(value) => setWeekDay(value)}
                 />
               </S.InputBlock>
               <S.InputBlock>
@@ -38,10 +79,12 @@ function TeacherList() {
                 <S.Input
                   placeholderTextColor="#c1bccc"
                   placeholder="Qual o horário?"
+                  value={time}
+                  onChangeText={(value) => setTime(value)}
                 />
               </S.InputBlock>
             </S.InputGroup>
-            <S.SubmitButton>
+            <S.SubmitButton onPress={() => searchTeachers()}>
               <S.SubmitButtonTxt>Filtrar</S.SubmitButtonTxt>
             </S.SubmitButton>
           </>
@@ -54,11 +97,13 @@ function TeacherList() {
             paddingBottom: 16,
           }}
         >
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
+          {teachers.map((teacher) => (
+            <TeacherItem
+              key={teacher.id}
+              teacher={teacher}
+              favorited={favorites.includes(teacher.id)}
+            />
+          ))}
         </S.Scrollview>
       </S.Container>
     </>

@@ -12,11 +12,11 @@ function Favorites() {
           paddingBottom: 16,
         }}
       >
+        {/* <TeacherItem />
         <TeacherItem />
         <TeacherItem />
         <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
+        <TeacherItem /> */}
       </S.Scrollview>
     </S.Container>
   );
