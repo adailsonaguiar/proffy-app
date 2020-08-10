@@ -6,6 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import * as S from './styles';
 import api from '../../services/api';
 import { AsyncStorage } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 function TeacherList() {
   const [filtersVisible, setFiltersVisible] = useState(false);
@@ -43,6 +44,8 @@ function TeacherList() {
       setFiltersVisible(false);
     }
   }
+
+  useFocusEffect(() => loadFavorites());
 
   return (
     <>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
 
 import * as S from './styles';
@@ -16,9 +17,9 @@ function Favorites() {
     });
   }
 
-  useEffect(() => {
+  useFocusEffect(() => {
     loadFavorites();
-  }, []);
+  });
 
   return (
     <S.Container>

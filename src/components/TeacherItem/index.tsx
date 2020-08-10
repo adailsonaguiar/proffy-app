@@ -72,7 +72,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher, favorited }) => {
             favorited={isFavorited}
             onPress={() => handleToggleFavorite()}
           >
-            {isFavorited ? (
+            {!isFavorited ? (
               <S.Image source={heartOutlineButton} />
             ) : (
               <S.Image source={unFavoriteIcon} />
